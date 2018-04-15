@@ -45,7 +45,7 @@ CREATE TABLE Pessoa (
     DataNasc text NOT NULL,  
     Banco text, 
     NumConta int, 
-    PRIMARY KEY (CC),
+    PRIMARY KEY (NIF),
     FOREIGN KEY (CodPostal) REFERENCES Localidade(CodPostal)
 );
 
