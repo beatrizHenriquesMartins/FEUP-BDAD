@@ -52,7 +52,6 @@ INSERT INTO Fornecedor (nif, nome, morada, telefone, email, codPostal)
 VALUES (664253100,'Madeiras e Minerios lda','Rua Ancelmo Margarida 2',294564115,'admin@madmin.com',6420),
 (664253120,'Lenha Continental Joao e Filhos lda','Rua Transilenia 42',294222465,'lenhajoaoefilhos@gmail.com',9500);
 
--- usar os códigos postais que já foram inseridos nas relações acima
 INSERT INTO Localidade (CodPostal, Localidade)
 VALUES (4002,'Almerias, Porto'),
 (5012,'Tomezios, Porto'),
