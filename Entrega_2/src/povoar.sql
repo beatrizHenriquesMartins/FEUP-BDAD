@@ -86,27 +86,27 @@ VALUES (993,'Nome do Banco',55632,'4%'),
 INSERT INTO Dinheiro (idPagamento)
 VALUES (995);
 
-INSERT INTO MaterialProduto (idMaterial, idProduto, quantidadeNecessaria)
+INSERT INTO Material_Produto (idMaterial, idProduto, quantidadeNecessaria)
 VALUES (33232,22221,'3m'),
 (33232,22221,'5m');
 
-INSERT INTO MaterialForcedor (idMaterial, nomeFornecedor)
+INSERT INTO Material_Fornecedor (idMaterial, nomeFornecedor)
 VALUES (11111,'Empresa Fornecedora 1'),
 (11112,'Empresa Fornecedora 2');
 
-INSERT INTO MaterialFabrica (idMaterial, idEstabelecimento)
+INSERT INTO Material_Fabrica (idMaterial, idEstabelecimento)
 VALUES (11111,223),
 (11112,223);
 
-INSERT INTO FornecedorFabrica (nomeFornecedor, idEstabelecimento)
+INSERT INTO Fornecedor_Fabrica (nomeFornecedor, idEstabelecimento)
 VALUES ('Empresa Fornecedora 1', 223),
 ('Empresa Fornecedora 2', 223);
 
-INSERT INTO LojaFabrica (idEstabelecimento, idEstabelecimento)
+INSERT INTO Loja_Fabrica (idEstabelecimento, idEstabelecimento)
 VALUES (224, 223);
 
-INSERT INTO ProdutoEstabelecimento (idProduto, idEstabelecimento)
+INSERT INTO Produto_Estabelecimento (idProduto, idEstabelecimento)
 VALUES (22221, 224);
 
-INSERT INTO ProdutoEspecialização (idProduto, nomeEspecialização)
+INSERT INTO Produto_Especialização (idProduto, nomeEspecialização)
 VALUES (22221, 'Marcenaria'), (22221, 'Madeiras');
