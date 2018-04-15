@@ -38,7 +38,7 @@ CREATE TABLE Localidade (
 
 -- O "nif" deve ser único e não nulo. O "nome" não deve ser nulo.
 CREATE TABLE Pessoa (
-    nif int NOT NULL UNIQUE,
+    nif INTEGER PRIMARY KEY,
     nome text NOT NULL, 
     morada text, 
     codPostal int, 
