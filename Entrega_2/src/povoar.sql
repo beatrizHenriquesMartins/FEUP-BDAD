@@ -108,5 +108,5 @@ VALUES (224, 223);
 INSERT INTO Produto_Estabelecimento (idProduto, idEstabelecimento)
 VALUES (22221, 224);
 
-INSERT INTO Produto_Especialização (idProduto, nomeEspecialização)
+INSERT INTO Produto_Especializacao (idProduto, nomeEspecialização)
 VALUES (22221, 'Marcenaria'), (22221, 'Madeiras');
