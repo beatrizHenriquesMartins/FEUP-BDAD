@@ -36,7 +36,6 @@ CREATE TABLE Localidade (
 );
 
 CREATE TABLE Pessoa (
-    CC int NOT NULL,
     Nome text NOT NULL, 
     Morada text NOT NULL, 
     CodPostal int,
