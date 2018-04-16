@@ -1,13 +1,14 @@
 INSERT INTO Pessoa (nif, nome, morada, telefone, email, dataNasc, banco, numConta, codPostal)
 VALUES (505653320,'Margarida','Rua de Santa Catarina 1220', 916325348, 'margarida@gmail.com', '26/11/1965', 'Santander', 46325, 4002),
-(505653331,'Joana','Avenida Leão Iberico 25', 962564521, joanabosques@sapo.pt, '17/5/1989', 'Santander', 52454, 5012),
-(452654568,'Artur','Rua Afonso Teicheira 61-1A', 912454321, 'gentlefox@gmail.com', '20/2/1985', 'Caixa', 6642, 4002),
-(856877561,'João','Rua Afonso Otávio 991-1A', 957632452, 'joaoafonso@gmail.com', '18/2/1998', 'Caixa', 6642, 4002);
+       (505653331,'Joana','Avenida Leão Iberico 25', 962564521, 'joanabosques@sapo.pt', '17/5/1989', 'Santander', 52454, 5012),
+       (452654568,'Artur','Rua Afonso Teicheira 61-1A', 912454321, 'gentlefox@gmail.com', '20/2/1985', 'Caixa', 6642, 4002),
+       (856877561,'João','Rua Afonso Otávio 991-1A', 957632452, 'joaoafonso@gmail.com', '18/2/1998', 'Caixa', 6642, 4002);
 
 INSERT INTO Cliente (nif, nomeEmpresa)
 VALUES (505653320,'Empresa de Madeiras do Norte'),
-(452654568,'Empresa de Madeiras do Sul');
+       (452654568,'Empresa de Madeiras do Sul');
 
+/*
 INSERT INTO Funcionario (nif, cargo, ordenado, agregadoFamiliar, horario, idEstabelecimento, nomeEspecializacao)
 VALUES (856877561,'Gerente',20000,3,'8:00-17:00',123,'Administração'),
 (505653331,'Carpinteiro',15000,2,'8:00-14:00',123,'Carpintaria');
@@ -110,3 +111,4 @@ VALUES (22221, 224);
 
 INSERT INTO Produto_Especializacao (idProduto, nomeEspecialização)
 VALUES (22221, 'Marcenaria'), (22221, 'Madeiras');
+*/

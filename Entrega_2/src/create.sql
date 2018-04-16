@@ -26,7 +26,7 @@ DROP TABLE if exists Produto_Especializacao;
 -- "nome" não pode ser nulo e deve ser único.
 CREATE TABLE Especializacao (
     nome text NOT NULL UNIQUE,
-    PRIMARY KEY (nome),
+    PRIMARY KEY (nome)
 );
 
 -- "Código postal" e "localidade" não podem ser nulos e devem ser únicos.
@@ -106,7 +106,7 @@ CREATE TABLE Venda (
     idEstabelecimento int, 
     PRIMARY KEY (idVenda),
     FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Loja(idEstabelecimento),
+    FOREIGN KEY (idEstabelecimento) REFERENCES Loja(idEstabelecimento)
 );
 
 CREATE TABLE Produto (
@@ -161,7 +161,7 @@ CREATE TABLE Funcionario (
     ordenado float NOT NULL, 
     agregadoFamiliar int NOT NULL, 
     horario text NOT NULL, 
-    PRIMARY KEY (nif),                                            #DUVIDA!! 
+    PRIMARY KEY (nif),
     FOREIGN KEY (nif) REFERENCES Pessoa(nif),
     FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
 );
@@ -208,7 +208,7 @@ CREATE TABLE Material_Fornecedor (
 CREATE TABLE Material_Fabrica (
     idMaterial text NOT NULL,
     idEstabelecimento int NOT NULL,
-    CONSTRAINT chaveComposta PRIMARY KEY (nomeMaterial, idEstabelecimento),
+    CONSTRAINT chaveComposta PRIMARY KEY (idMaterial, idEstabelecimento),
     FOREIGN KEY (idMaterial) REFERENCES Material(idMaterial),
     FOREIGN KEY (idEstabelecimento) REFERENCES Fabrica(idEstabelecimento)
 );
