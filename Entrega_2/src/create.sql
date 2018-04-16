@@ -31,8 +31,8 @@ CREATE TABLE Especializacao (
 
 -- "Código postal" e "localidade" não podem ser nulos e devem ser únicos.
 CREATE TABLE Localidade (
-    codPostal int NOT NULL UNIQUE,
-    localidade text NOT NULL UNIQUE,
+    codPostal int NOT NULL,
+    localidade text NOT NULL,
     PRIMARY KEY (codPostal)
 );
 
@@ -70,6 +70,19 @@ CREATE TABLE Cliente (
     PRIMARY KEY (nif),
     FOREIGN KEY (nif) REFERENCES Pessoa(nif),
     FOREIGN KEY (nomeEmpresa) REFERENCES Empresa(nome)
+);
+
+CREATE TABLE Funcionario (
+    nif int,
+    idEstabelecimento int,
+    cargo text NOT NULL,
+    ordenado float NOT NULL, 
+    agregadoFamiliar int NOT NULL, 
+    horario text NOT NULL,
+    nomeEspecializacao text NOT NULL, 
+    PRIMARY KEY (nif),
+    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
+    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
 );
 
 
@@ -144,6 +157,7 @@ CREATE TABLE Cartao (
     idPagamento int NOT NULL,
     banco text NOT NULL,
     numConta int NOT NULL,
+    taxa float NOT NULL,
     PRIMARY KEY (idPagamento),
     FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
 );
@@ -152,18 +166,6 @@ CREATE TABLE Dinheiro (
     idPagamento int NOT NULL,
     PRIMARY KEY (idPagamento),
     FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
-);
-
-CREATE TABLE Funcionario (
-    nif int,
-    idEstabelecimento int,
-    cargo text NOT NULL,
-    ordenado float NOT NULL, 
-    agregadoFamiliar int NOT NULL, 
-    horario text NOT NULL, 
-    PRIMARY KEY (nif),
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
 );
 
 CREATE TABLE Material (
@@ -177,14 +179,13 @@ CREATE TABLE Material (
 );
 
 CREATE TABLE Fornecedor (
-    idFornecedor int NOT NULL UNIQUE,
+    nif int NOT NULL UNIQUE,
     nome text NOT NULL UNIQUE,
     morada text,
-    codPostal int,
-    nif int NOT NULL UNIQUE, 
+    codPostal int, 
     telefone text, 
     email text, 
-    PRIMARY KEY (idFornecedor),
+    PRIMARY KEY (nif),
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
