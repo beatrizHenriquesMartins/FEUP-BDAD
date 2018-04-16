@@ -23,20 +23,17 @@ DROP TABLE if exists Loja_Fabrica;
 DROP TABLE if exists Produto_Estabelecimento;
 DROP TABLE if exists Produto_Especializacao;
 
--- "nome" não pode ser nulo e deve ser único.
 CREATE TABLE Especializacao (
     nome text NOT NULL UNIQUE,
     PRIMARY KEY (nome)
 );
 
--- "Código postal" e "localidade" não podem ser nulos e devem ser únicos.
 CREATE TABLE Localidade (
     codPostal int NOT NULL,
     localidade text NOT NULL,
     PRIMARY KEY (codPostal)
 );
 
--- O "nif" deve ser único e não nulo. O "nome" não deve ser nulo.
 CREATE TABLE Pessoa (
     nif INTEGER PRIMARY KEY,
     nome text NOT NULL, 
@@ -47,11 +44,9 @@ CREATE TABLE Pessoa (
     dataNasc date,  
     banco text, 
     numConta int, 
-    --PRIMARY KEY (nif),
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
--- O "nif" deve ser único e não nulo. O "nome" não deve ser nulo.
 CREATE TABLE Empresa (
     nif int NOT NULL UNIQUE, 
     nome text NOT NULL,
@@ -63,7 +58,6 @@ CREATE TABLE Empresa (
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
--- O "nif" deve ser único e não nulo. O "nome" não deve ser nulo.
 CREATE TABLE Cliente (
     nif int,
     nomeEmpresa text,
@@ -84,7 +78,6 @@ CREATE TABLE Funcionario (
     FOREIGN KEY (nif) REFERENCES Pessoa(nif),
     FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
 );
-
 
 CREATE TABLE Estabelecimento (
     idEstabelecimento int NOT NULL UNIQUE,
