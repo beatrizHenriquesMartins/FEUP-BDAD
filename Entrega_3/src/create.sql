@@ -36,49 +36,45 @@ CREATE TABLE Localidade (
     PRIMARY KEY (codPostal)
 );
 
+CREATE TABLE Material (
+    idMaterial int,
+    nome text NOT NULL,
+    tipo text NOT NULL,
+    quantidade float NOT NULL,
+    preco float,
+    cor text,
+    PRIMARY KEY (idMaterial)
+);
+
 CREATE TABLE Pessoa (
-    nif INTEGER PRIMARY KEY,
+    nifPessoa INTEGER PRIMARY KEY,
     nome text NOT NULL, 
-    morada text, 
-    codPostal int, 
+    morada text,  
     telefone text, 
     email text, 
     dataNasc date,  
     banco text, 
-    numConta int, 
+    numConta int,
+    codPostal int, 
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Empresa (
-    nif int, 
+    nifEmpresa INTEGER PRIMARY KEY, 
     nome text NOT NULL,
     morada text,
-    codPostal int,
     telefone text, 
     email text, 
-    PRIMARY KEY (nif),
+    codPostal int,
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Cliente (
-    nif int,
-    nomeEmpresa text,
-    PRIMARY KEY (nif),
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
-    FOREIGN KEY (nomeEmpresa) REFERENCES Empresa(nome)
-);
-
-CREATE TABLE Funcionario (
-    nif int,
-    idEstabelecimento int,
-    cargo text NOT NULL,
-    ordenado float NOT NULL, 
-    agregadoFamiliar int NOT NULL, 
-    horario text NOT NULL,
-    nomeEspecializacao text NOT NULL, 
-    PRIMARY KEY (nif),
-    FOREIGN KEY (nif) REFERENCES Pessoa(nif),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+    nifCliente int,
+    nifEmpresa int,
+    PRIMARY KEY (nifCliente),
+    FOREIGN KEY (nifCliente) REFERENCES Pessoa(nifPessoa),
+    FOREIGN KEY (nifEmpresa) REFERENCES Empresa(nifEmpresa)
 );
 
 CREATE TABLE Estabelecimento (
@@ -88,10 +84,24 @@ CREATE TABLE Estabelecimento (
     telefone text, 
     tipo text NOT NULL,
     email text, 
-    nomeEmpresa text,
+    nifEmpresa int,
     PRIMARY KEY (idEstabelecimento),
-    FOREIGN KEY (nomeEmpresa) REFERENCES Empresa(nome),
+    FOREIGN KEY (nifEmpresa) REFERENCES Empresa(nifEmpresa),
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
+);
+
+CREATE TABLE Funcionario (
+    nifFuncionario int,
+    idEstabelecimento int,
+    cargo text NOT NULL,
+    ordenado float NOT NULL, 
+    agregadoFamiliar int NOT NULL, 
+    horario text NOT NULL,
+    nomeEspecializacao text NOT NULL, 
+    PRIMARY KEY (nifFuncionario),
+    FOREIGN KEY (nifFuncionario) REFERENCES Pessoa(nifPessoa),
+    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento),
+    FOREIGN KEY (nomeEspecializacao) REFERENCES Especializacao(nome)
 );
 
 CREATE TABLE Fabrica (
@@ -128,6 +138,18 @@ CREATE TABLE Produto (
     FOREIGN KEY (idVenda) REFERENCES Venda(idVenda)
 );
 
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------
+
 CREATE TABLE Pagamento (
     idPagamento int,
     idVenda int NOT NULL,
@@ -163,15 +185,9 @@ CREATE TABLE Dinheiro (
     FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
 );
 
-CREATE TABLE Material (
-    idMaterial int,
-    nome text NOT NULL,
-    tipo text NOT NULL,
-    estoque float NOT NULL,
-    preco float,
-    cor text,
-    PRIMARY KEY (idMaterial)
-);
+
+
+
 
 CREATE TABLE Fornecedor (
     nif int,
