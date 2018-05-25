@@ -20,7 +20,7 @@ DROP TABLE if exists Material_Fornecedor;
 DROP TABLE if exists Material_Fabrica;
 DROP TABLE if exists Fornecedor_Fabrica;
 DROP TABLE if exists Loja_Fabrica;
-DROP TABLE if exists Produto_Estabelecimento;
+DROP TABLE if exists Estabelecimento_Produto;
 DROP TABLE if exists Produto_Especializacao;
 
 CREATE TABLE Especializacao (
