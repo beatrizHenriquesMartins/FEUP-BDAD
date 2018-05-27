@@ -1,3 +1,11 @@
+DROP TABLE if exists Material_Produto;
+DROP TABLE if exists Material_Fornecedor;
+DROP TABLE if exists Material_Fabrica;
+DROP TABLE if exists Fornecedor_Fabrica;
+DROP TABLE if exists Loja_Fabrica;
+DROP TABLE if exists Estabelecimento_Produto;
+DROP TABLE if exists Produto_Especializacao;
+DROP TABLE if exists Venda_Produto;
 DROP TABLE if exists Especializacao;
 DROP TABLE if exists Localidade;
 DROP TABLE if exists Material;
@@ -15,13 +23,7 @@ DROP TABLE if exists Cheque;
 DROP TABLE if exists Cartao;
 DROP TABLE if exists Dinheiro;
 DROP TABLE if exists Fornecedor;
-DROP TABLE if exists Material_Produto;
-DROP TABLE if exists Material_Fornecedor;
-DROP TABLE if exists Material_Fabrica;
-DROP TABLE if exists Fornecedor_Fabrica;
-DROP TABLE if exists Loja_Fabrica;
-DROP TABLE if exists Estabelecimento_Produto;
-DROP TABLE if exists Produto_Especializacao;
+
 
 CREATE TABLE Especializacao (
     id INTEGER PRIMARY KEY,
