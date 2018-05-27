@@ -58,14 +58,24 @@ VALUES (441, 300, '20/03/2018', 505653320, 224),
        (444, 1000, '21/03/2018', 452654568, 224),
        (445, 100, '22/03/2018', 505653320, 224);
 
-INSERT INTO Produto (idProduto, nome, preco, dimensao, cor, idVenda)
-VALUES (111,'Armário Almero Pequeno',300,'1x1','Branco',441),
-       (112,'Armário Almero Medio',350,'1x2','Branco',442),
-       (121,'Gavetas Branstrum P',500,'3x1','Azul',443),
-       (123,'Gavetas Branstrum XL',600,'3x3','Azul',443),
-       (124,'Gavetas Branstrum L',600,'3x3','Azul',443),
-       (125,'Gavetas Branstrum M',600,'3x3','Azul',443);
+/*
+INSERT INTO Produto (idProduto, nome, preco, dimensao, cor, idVenda, quantidadeVendida)
+VALUES (111,'Armário Almero Pequeno',300,'1x1','Branco',441,100),
+       (112,'Armário Almero Medio',350,'1x2','Branco',442,110),
+       (121,'Gavetas Branstrum P',500,'3x1','Azul',443,120),
+       (123,'Gavetas Branstrum XL',600,'3x3','Azul',443,130),
+       (124,'Gavetas Branstrum L',600,'3x3','Azul',443,140),
+       (125,'Gavetas Branstrum M',600,'3x3','Azul',443,150);
+*/
 
+INSERT INTO Produto (idProduto, nome, preco, dimensao, cor, quantidadeVendida)
+VALUES (111,'Armário Almero Pequeno',300,'1x1','Branco',100),
+       (112,'Armário Almero Medio',350,'1x2','Branco',110),
+       (121,'Gavetas Branstrum P',500,'3x1','Azul',120),
+       (123,'Gavetas Branstrum XL',600,'3x3','Azul',130),
+       (124,'Gavetas Branstrum L',600,'3x3','Azul',140),
+       (125,'Gavetas Branstrum M',600,'3x3','Azul',150);
+       
 INSERT INTO Pagamento (idPagamento, idVenda, quantia, tipo, efetuado, dataPagamento) 
 VALUES (991,441,300,'cheque','sim','20/03/2018'),
        (992,442,1000,'cheque','sim','21/03/2018'),
@@ -113,3 +123,8 @@ VALUES (224, 111);
 INSERT INTO Produto_Especializacao (idProduto, nomeEspecializacao)
 VALUES (112, 'Marcenaria'), 
        (121, 'Carpintaria');
+
+INSERT INTO Venda_Produto(venda_id, produto_id, quantidade)
+VALUES (111, 441, 2),
+       (123, 443, 3),
+       (125, 445, 1);
