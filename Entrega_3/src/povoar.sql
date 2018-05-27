@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 INSERT INTO Especializacao (id, nome)
 VALUES (1, 'Administração'),
        (2, 'Marcenaria'),
@@ -48,7 +50,7 @@ INSERT INTO Fabrica (fabrica_id)
 VALUES (223),
        (225);
 
-INSERT INTO Loja (estabelecimento_id)
+INSERT INTO Loja (loja_id)
 VALUES (224);
 
 INSERT INTO Venda(id, Quantia, DataVenda, cliente_id, funcionario_id, estabelecimento_id)

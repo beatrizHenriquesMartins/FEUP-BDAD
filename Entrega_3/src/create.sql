@@ -6,28 +6,27 @@ DROP TABLE if exists Loja_Fabrica;
 DROP TABLE if exists Estabelecimento_Produto;
 DROP TABLE if exists Produto_Especializacao;
 DROP TABLE if exists Venda_Produto;
-DROP TABLE if exists Especializacao;
-DROP TABLE if exists Localidade;
-DROP TABLE if exists Material;
-DROP TABLE if exists Pessoa;
-DROP TABLE if exists Empresa;
-DROP TABLE if exists Cliente;
-DROP TABLE if exists Estabelecimento;
-DROP TABLE if exists Funcionario;
-DROP TABLE if exists Fabrica;
-DROP TABLE if exists Loja;
-DROP TABLE if exists Venda;
-DROP TABLE if exists Produto;
-DROP TABLE if exists Pagamento;
+DROP TABLE if exists Fornecedor;
 DROP TABLE if exists Cheque;
 DROP TABLE if exists Cartao;
 DROP TABLE if exists Dinheiro;
-DROP TABLE if exists Fornecedor;
-
+DROP TABLE if exists Pagamento;
+DROP TABLE if exists Produto;
+DROP TABLE if exists Venda;
+DROP TABLE if exists Loja;
+DROP TABLE if exists Fabrica;
+DROP TABLE if exists Funcionario;
+DROP TABLE if exists Estabelecimento;
+DROP TABLE if exists Cliente;
+DROP TABLE if exists Empresa;
+DROP TABLE if exists Pessoa;
+DROP TABLE if exists Material;
+DROP TABLE if exists Localidade;
+DROP TABLE if exists Especializacao;
 
 CREATE TABLE Especializacao (
     id INTEGER PRIMARY KEY,
-    nome TEXT
+    nome TEXT NOT NULL
 );
 
 CREATE TABLE Localidade (
@@ -48,12 +47,12 @@ CREATE TABLE Pessoa (
     nif INTEGER PRIMARY KEY,
     nome TEXT NOT NULL, 
     morada TEXT,  
-    telefone TEXT, 
-    email TEXT, 
+    telefone TEXT NOT NULL, 
+    email TEXT NOT NULL, 
     dataNasc DATE,  
     idade INT,
-    banco TEXT, 
-    numConta INT,
+    banco TEXT NOT NULL, 
+    numConta INT NOT NULL,
     codPostal INT, 
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
@@ -106,8 +105,8 @@ CREATE TABLE Fabrica (
 );
 
 CREATE TABLE Loja (
-    estabelecimento_id INTEGER PRIMARY KEY,
-    FOREIGN KEY (estabelecimento_id) REFERENCES Estabelecimento(id)
+    loja_id INTEGER PRIMARY KEY,
+    FOREIGN KEY (loja_id) REFERENCES Estabelecimento(id)
 );
 
 CREATE TABLE Venda (
@@ -117,9 +116,9 @@ CREATE TABLE Venda (
     cliente_id INT,
     funcionario_id INT,
     estabelecimento_id INT, 
-    FOREIGN KEY (cliente_id) REFERENCES Cliente(nif),
-    FOREIGN KEY (funcionario_id) REFERENCES Funcinario(funcionario_nif),
-    FOREIGN KEY (estabelecimento_id) REFERENCES Loja(id)
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(cliente_nif),
+    FOREIGN KEY (funcionario_id) REFERENCES Funcionario(funcionario_nif),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Loja(loja_id)
 );
 
 CREATE TABLE Produto (
@@ -185,7 +184,7 @@ CREATE TABLE Material_Fornecedor (
     material_id INT,
     fornecedor_id INT,
     CONSTRAINT chaveComposta PRIMARY KEY (material_id, fornecedor_id),
-    FOREIGN KEY (material_id) REFERENCES Material(idMaterial),
+    FOREIGN KEY (material_id) REFERENCES Material(id),
     FOREIGN KEY (fornecedor_id) REFERENCES Fornecedor(nif)
 );
 
@@ -209,8 +208,8 @@ CREATE TABLE Loja_Fabrica (
     loja_id INT,
     fabrica_id INT,
     CONSTRAINT chaveComposta PRIMARY KEY (loja_id, fabrica_id),
-    FOREIGN KEY (loja_id) REFERENCES Loja(id),
-    FOREIGN KEY (fabrica_id) REFERENCES Fabrica(id)
+    FOREIGN KEY (loja_id) REFERENCES Loja(loja_id),
+    FOREIGN KEY (fabrica_id) REFERENCES Fabrica(fabrica_id)
 );
 
 CREATE TABLE Estabelecimento_Produto (
