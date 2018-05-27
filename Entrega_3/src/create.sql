@@ -23,233 +23,219 @@ DROP TABLE if exists Cheque;
 DROP TABLE if exists Cartao;
 DROP TABLE if exists Dinheiro;
 DROP TABLE if exists Fornecedor;
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 
 CREATE TABLE Especializacao (
-    nome text,
-    PRIMARY KEY (nome)
+    id INTEGER PRIMARY KEY,
+    nome TEXT
 );
 
 CREATE TABLE Localidade (
-    codPostal int,
-    localidade text NOT NULL,
-    PRIMARY KEY (codPostal)
+    codPostal INTEGER PRIMARY KEY,
+    localidade TEXT NOT NULL
 );
 
 CREATE TABLE Material (
-    idMaterial int,
-    nome text NOT NULL,
-    tipo text NOT NULL,
-    quantidade float NOT NULL,
-    preco float,
-    cor text,
-    PRIMARY KEY (idMaterial)
-);
-
-CREATE TABLE Produto (
-    idProduto int,
-    nome text NOT NULL, 
-    preco float NOT NULL, 
-    dimensao text,
-    cor text,
-    /*idVenda int,*/
-    quantidadeVendida int,
-    PRIMARY KEY (idProduto)/*,
-    FOREIGN KEY (idVenda) REFERENCES Venda(idVenda)*/
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    quantidade FLOAT NOT NULL,
+    preco FLOAT,
+    cor TEXT
 );
 
 CREATE TABLE Pessoa (
-    nifPessoa INTEGER PRIMARY KEY,
-    nome text NOT NULL, 
-    morada text,  
-    telefone text, 
-    email text, 
-    dataNasc date,  
-    banco text, 
-    numConta int,
-    codPostal int, 
+    nif INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL, 
+    morada TEXT,  
+    telefone TEXT, 
+    email TEXT, 
+    dataNasc DATE,  
+    idade INT,
+    banco TEXT, 
+    numConta INT,
+    codPostal INT, 
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Empresa (
-    nifEmpresa INTEGER PRIMARY KEY, 
-    nome text NOT NULL,
-    morada text,
-    telefone text, 
-    email text, 
-    codPostal int,
-    FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
+    nif INTEGER PRIMARY KEY, 
+    nome TEXT NOT NULL,
+    morada TEXT NOT NULL,
+    telefone TEXT NOT NULL, 
+    email TEXT NOT NULL, 
+    empresa_codPostal INT,
+    FOREIGN KEY (empresa_codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Cliente (
-    nifCliente int,
-    nifEmpresa int,
-    PRIMARY KEY (nifCliente),
-    FOREIGN KEY (nifCliente) REFERENCES Pessoa(nifPessoa),
-    FOREIGN KEY (nifEmpresa) REFERENCES Empresa(nifEmpresa)
+    cliente_nif INTEGER PRIMARY KEY,
+    empresa_nif INT,
+    FOREIGN KEY (cliente_nif) REFERENCES Pessoa(nif),
+    FOREIGN KEY (empresa_nif) REFERENCES Empresa(nif)
 );
 
 CREATE TABLE Estabelecimento (
-    idEstabelecimento int,
-    morada text NOT NULL, 
-    codPostal int NOT NULL,
-    telefone text, 
-    tipo text NOT NULL,
-    email text, 
-    nifEmpresa int,
-    PRIMARY KEY (idEstabelecimento),
-    FOREIGN KEY (nifEmpresa) REFERENCES Empresa(nifEmpresa),
-    FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
+    id INTEGER PRIMARY KEY,
+    morada TEXT NOT NULL, 
+    telefone TEXT NOT NULL, 
+    tipo TEXT NOT NULL,
+    email TEXT, 
+    empresa_nif INT,
+    estabelecimento_codPostal INT,
+    FOREIGN KEY (empresa_nif) REFERENCES Empresa(nif),
+    FOREIGN KEY (estabelecimento_codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Funcionario (
-    nifFuncionario int,
-    idEstabelecimento int,
-    cargo text NOT NULL,
-    ordenado float NOT NULL, 
-    agregadoFamiliar int NOT NULL, 
-    horario text NOT NULL,
-    nomeEspecializacao text NOT NULL, 
-    PRIMARY KEY (nifFuncionario),
-    FOREIGN KEY (nifFuncionario) REFERENCES Pessoa(nifPessoa),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento),
-    FOREIGN KEY (nomeEspecializacao) REFERENCES Especializacao(nome)
+    funcionario_nif INTEGER PRIMARY KEY,
+    cargo TEXT NOT NULL,
+    ordenado FLOAT NOT NULL, 
+    agregadoFamiliar INT NOT NULL, 
+    horario TEXT NOT NULL,
+    especializacao_id INT NOT NULL, 
+    estabelecimento_id INT,
+    FOREIGN KEY (funcionario_nif) REFERENCES Pessoa(nif),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Estabelecimento(id),
+    FOREIGN KEY (especializacao_id) REFERENCES Especializacao(id)
 );
 
 CREATE TABLE Fabrica (
-    idFabrica int,
-    PRIMARY KEY (idFabrica),
-    FOREIGN KEY (idFabrica) REFERENCES Estabelecimento(idEstabelecimento)
+    fabrica_id INTEGER PRIMARY KEY,
+    FOREIGN KEY (fabrica_id) REFERENCES Estabelecimento(id)
 );
 
 CREATE TABLE Loja (
-    idEstabelecimento int,
-    PRIMARY KEY (idEstabelecimento),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+    estabelecimento_id INTEGER PRIMARY KEY,
+    FOREIGN KEY (estabelecimento_id) REFERENCES Estabelecimento(id)
 );
 
 CREATE TABLE Venda (
-    idVenda int,
-    quantia float NOT NULL,
+    id INTEGER PRIMARY KEY,
+    quantia FLOAT NOT NULL,
     dataVenda date NOT NULL,
-    idCliente int,
-    idEstabelecimento int, 
-    PRIMARY KEY (idVenda),
-    FOREIGN KEY (idCliente) REFERENCES Cliente(nifCliente),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Loja(idEstabelecimento)
+    cliente_id INT,
+    funcionario_id INT,
+    estabelecimento_id INT, 
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(nif),
+    FOREIGN KEY (funcionario_id) REFERENCES Funcinario(funcionario_nif),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Loja(id)
+);
+
+CREATE TABLE Produto (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL, 
+    preco FLOAT NOT NULL, 
+    dimensao TEXT,
+    cor TEXT,
+    quantidadeVendida INT
 );
 
 CREATE TABLE Pagamento (
-    idPagamento int,
-    idVenda int NOT NULL,
-    quantia float NOT NULL,
-    tipo text NOT NULL,
-    efetuado text NOT NULL,
-    dataPagamento date NOT NULL,
-    PRIMARY KEY (idPagamento),
-    FOREIGN KEY (idVenda) REFERENCES Venda(idVenda)
+    id INTEGER PRIMARY KEY,
+    quantia FLOAT NOT NULL,
+    tipo TEXT NOT NULL,
+    efetuado TEXT NOT NULL,
+    dataPagamento TEXT NOT NULL,
+    venda_id INT,
+    FOREIGN KEY (venda_id) REFERENCES Venda(id)
 );
 
 CREATE TABLE Cheque (
-    idPagamento int,
-    banco text NOT NULL,
-    depositado text NOT NULL,
-    dataDeposito date NOT NULL,
-    PRIMARY KEY (idPagamento),
-    FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
+    pagamento_id INTEGER PRIMARY KEY,
+    banco TEXT NOT NULL,
+    depositado TEXT NOT NULL,
+    dataDeposito TEXT NOT NULL,
+    FOREIGN KEY (pagamento_id) REFERENCES Pagamento(id)
 );
 
 CREATE TABLE Cartao (
-    idPagamento int,
-    banco text NOT NULL,
-    numConta int NOT NULL,
-    taxa float NOT NULL,
-    PRIMARY KEY (idPagamento),
-    FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
+    pagamento_id INTEGER PRIMARY KEY,
+    banco TEXT NOT NULL,
+    numConta INT NOT NULL,
+    taxa FLOAT NOT NULL,
+    FOREIGN KEY (pagamento_id) REFERENCES Pagamento(id)
 );
 
 CREATE TABLE Dinheiro (
-    idPagamento int,
-    PRIMARY KEY (idPagamento),
-    FOREIGN KEY (idPagamento) REFERENCES Pagamento(idPagamento)
+    pagamento_id INTEGER PRIMARY KEY,
+    FOREIGN KEY (pagamento_id) REFERENCES Pagamento(id)
 );
 
 CREATE TABLE Fornecedor (
-    nif int,
-    nome text NOT NULL UNIQUE,
-    morada text,
-    codPostal int, 
-    telefone text, 
-    email text, 
-    PRIMARY KEY (nif),
-    FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
+    nif INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL UNIQUE,
+    morada TEXT NOT NULL,
+    telefone TEXT NOT NULL, 
+    email TEXT NOT NULL, 
+    fornecedor_codPostal INT, 
+    FOREIGN KEY (fornecedor_codPostal) REFERENCES Localidade(codPostal)
 );
 
 CREATE TABLE Material_Produto (
-    idMaterial int,
-    idProduto int,
-    quantidadeNecessaria text NOT NULL,
-    CONSTRAINT chaveComposta PRIMARY KEY (idMaterial, idProduto),
-    FOREIGN KEY (idMaterial) REFERENCES Material(idMaterial),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    material_id INT,
+    produto_id INT,
+    quantidadeNecessaria INT NOT NULL,
+    CONSTRAINT chaveComposta PRIMARY KEY (material_id, produto_id),
+    FOREIGN KEY (material_id) REFERENCES Material(id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id)
 );
 
 CREATE TABLE Material_Fornecedor (
-    idMaterial text,
-    idFornecedor text,
-    CONSTRAINT chaveComposta PRIMARY KEY (idMaterial, idFornecedor),
-    FOREIGN KEY (idMaterial) REFERENCES Material(idMaterial),
-    FOREIGN KEY (idFornecedor) REFERENCES Fornecedor(nif)
+    material_id INT,
+    fornecedor_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (material_id, fornecedor_id),
+    FOREIGN KEY (material_id) REFERENCES Material(idMaterial),
+    FOREIGN KEY (fornecedor_id) REFERENCES Fornecedor(nif)
 );
 
 CREATE TABLE Material_Fabrica (
-    idMaterial text,
-    idEstabelecimento int,
-    CONSTRAINT chaveComposta PRIMARY KEY (idMaterial, idEstabelecimento),
-    FOREIGN KEY (idMaterial) REFERENCES Material(idMaterial),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Fabrica(idFabrica)
+    material_id INT,
+    estabelecimento_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (material_id, estabelecimento_id),
+    FOREIGN KEY (material_id) REFERENCES Material(id),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Fabrica(fabrica_id)
 );
 
 CREATE TABLE Fornecedor_Fabrica (
-    idFornecedor text,
-    idEstabelecimento int,
-    CONSTRAINT chaveComposta PRIMARY KEY (idFornecedor, idEstabelecimento),
-    FOREIGN KEY (idFornecedor) REFERENCES Fornecedor(nif),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Fabrica(idFabrica)
+    fornecedor_id INT,
+    estabelecimento_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (fornecedor_id, estabelecimento_id),
+    FOREIGN KEY (fornecedor_id) REFERENCES Fornecedor(nif),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Fabrica(fabrica_id)
 );
 
 CREATE TABLE Loja_Fabrica (
-    idLoja int,
-    idFabrica int,
-    CONSTRAINT chaveComposta PRIMARY KEY (idLoja, idFabrica),
-    FOREIGN KEY (idLoja) REFERENCES Loja(idEstabelecimento),
-    FOREIGN KEY (idFabrica) REFERENCES Fabrica(idFabrica)
+    loja_id INT,
+    fabrica_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (loja_id, fabrica_id),
+    FOREIGN KEY (loja_id) REFERENCES Loja(id),
+    FOREIGN KEY (fabrica_id) REFERENCES Fabrica(id)
 );
 
 CREATE TABLE Estabelecimento_Produto (
-    idEstabelecimento int,
-    idProduto int,
-    CONSTRAINT chaveComposta PRIMARY KEY (idProduto, idEstabelecimento),
-    FOREIGN KEY (idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    estabelecimento_id INT,
+    produto_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (produto_id, estabelecimento_id),
+    FOREIGN KEY (estabelecimento_id) REFERENCES Estabelecimento(id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id)
 );
 
 CREATE TABLE Produto_Especializacao (
-    idProduto int,
-    nomeEspecializacao int,
-    CONSTRAINT chaveComposta PRIMARY KEY (idProduto, nomeEspecializacao),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto),
-    FOREIGN KEY (nomeEspecializacao) REFERENCES Especializacao(nome)
+    produto_id INT,
+    especializacao_id INT,
+    CONSTRAINT chaveComposta PRIMARY KEY (produto_id, especializacao_id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id),
+    FOREIGN KEY (especializacao_id) REFERENCES Especializacao(id)
 );
 
 CREATE TABLE Venda_Produto(
-    venda_id int NOT NULL,
-    produto_id int NOT NULL,
-    quantidade int NOT NULL,
+    venda_id INT,
+    produto_id INT,
+    quantidade INT,
     CONSTRAINT chaveComposta PRIMARY KEY (venda_id, produto_id),
-    FOREIGN KEY (venda_id) REFERENCES Venda(idVenda),
-    FOREIGN KEY (produto_id) REFERENCES Produto(idProduto)
+    FOREIGN KEY (venda_id) REFERENCES Venda(id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id)
 );
+
+
