@@ -102,7 +102,6 @@ VALUES (664253100,'Madeiras e Minerios lda','Rua Ancelmo Margarida 2',294564115,
 INSERT INTO Material_Produto (material_id, produto_id, quantidadeNecessaria)
 VALUES (241, 111, 100),
        (241, 112, 200),
-       (242, 112, 100),
        (241, 121, 200),
        (242, 123, 100),
        (242, 124, 100),
