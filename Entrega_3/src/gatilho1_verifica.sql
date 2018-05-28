@@ -1,5 +1,5 @@
 .headers off
-select ('
+SELECT ('
         
         Tabela Produto ORIGINAL
         _______________________
@@ -7,11 +7,11 @@ select ('
         ');
 .headers on
 
-select * from produto;
+SELECT * FROM produto;
 
 
 .headers off
-select ('
+SELECT ('
         
         Comando: Adicionar 1 unidade do produto 111 à venda cujo id = 445.
         
@@ -20,6 +20,6 @@ select ('
         
         ');
 .headers on
-insert into venda_produto values(445, 111, 1);
-select * from produto;
+INSERT INTO venda_produto(venda_id, produto_id, quantidade) VALUES(445, 111, 1);
+SELECT * FROM produto;
 

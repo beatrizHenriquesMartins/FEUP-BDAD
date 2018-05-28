@@ -7,7 +7,7 @@ select ('
         ');
 .headers on
 
-select * from venda;
+SELECT * FROM venda;
 
 .headers off
 select ('
@@ -20,8 +20,8 @@ select ('
         ');
 .headers on
 
-insert into venda_produto values(445, 121, 2);
+INSERT INTO venda_produto(venda_id, produto_id, quantidade) VALUES(445, 121, 2);
 
 
-select * from venda;
+SELECT * FROM venda;
 

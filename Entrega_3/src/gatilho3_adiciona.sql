@@ -1,4 +1,7 @@
-create view if not exists venda_valorTotal as select venda_id, produto_id, quantidade, preco as precoUnitario, sum(preco*quantidade) as valorTotal from venda_produto as vp join produto as p on vp.produto_id=p.id group by venda_id;
+CREATE VIEW IF NOT EXISTS venda_valorTotal AS 
+SELECT venda_id, produto_id, quantidade, preco AS precoUnitario, SUM(preco*quantidade) AS valorTotal 
+FROM venda_produto AS vp JOIN produto AS p ON vp.produto_id=p.id 
+GROUP BY venda_id;
 
 CREATE TRIGGER if not exists atualizaValorTotal 
 AFTER INSERT ON venda_produto 
