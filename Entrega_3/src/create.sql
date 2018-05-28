@@ -26,7 +26,7 @@ DROP TABLE if exists Especializacao;
 
 CREATE TABLE Especializacao (
     id INTEGER PRIMARY KEY,
-    nome TEXT
+    nome TEXT NOT NULL
 );
 
 CREATE TABLE Localidade (
@@ -47,12 +47,12 @@ CREATE TABLE Pessoa (
     nif INTEGER PRIMARY KEY,
     nome TEXT NOT NULL, 
     morada TEXT,  
-    telefone TEXT, 
-    email TEXT, 
+    telefone TEXT NOT NULL, 
+    email TEXT NOT NULL, 
     dataNasc DATE,  
     idade INT,
-    banco TEXT, 
-    numConta INT,
+    banco TEXT NOT NULL, 
+    numConta INT NOT NULL,
     codPostal INT, 
     FOREIGN KEY (codPostal) REFERENCES Localidade(codPostal)
 );

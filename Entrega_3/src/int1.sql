@@ -1,7 +1,7 @@
-.mode columns
-.headers on
-.nullvalue NULL
+.mode columns 
 
--- Quantos pagamentos foram realizados em dinheiro/cheque/cartao?
+.headers on 
+
+.nullvalue NULL
 
 SELECT tipo, count(*) AS quantidade FROM pagamento GROUP BY tipo;
